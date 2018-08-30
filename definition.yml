@@ -1,6 +1,6 @@
 id: angle
-docker_repository: dynverse/dynmethods:angle
-container_url: https://github.com/dynverse/dynmethods/tree/master/containers/angle
+docker_repository: dynverse/ti_angle
+container_url: https://github.com/dynverse/ti_angle
 name: Angle
 type: control
 trajectory_types: cycle
