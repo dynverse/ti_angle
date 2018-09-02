@@ -21,8 +21,8 @@ before_install:
   - source <(curl -s https://raw.githubusercontent.com/dynverse/dynwrap/master/.travis_get_hdf5_if_needed.sh)
   - R -e "install.packages('hdf5r')"
 install:
- - docker build -t dynverse/ti_angle .
+ - docker build -t dynverse/travis_test_build .
  - R -e 'if ("devtools" %in% rownames(installed.packages())) update.packages(oldPkgs = "devtools", ask = FALSE) else install.packages("devtools")'
  - R -e 'setRepositories(ind = 1:4); devtools::install_github(c("dynverse/dynwrap@devel", "dynverse/dyntoy@devel"), dependencies = TRUE, upgrade = TRUE)'
 script:
-  - R -e 'source("example.R"); traj <- dynwrap::infer_trajectory(data, "dynverse/ti_angle", params)'
+  - R -e 'source("example.R"); traj <- dynwrap::infer_trajectory(data, "dynverse/travis_test_build", params)'
