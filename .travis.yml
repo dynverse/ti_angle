@@ -18,7 +18,7 @@ before_install:
   - echo $HDF5_DIR
   - export HDF5_VERSION=1.10.1
   - echo $HDF5_VERSION
-  - source .travis_get_hdf5_if_needed.sh
+  - source <(curl -s https://raw.githubusercontent.com/dynverse/dynwrap/master/.travis_get_hdf5_if_needed.sh)
   - R -e "install.packages('hdf5r')"
 install:
  - docker build -t dynverse/ti_angle .
