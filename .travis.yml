@@ -1,0 +1,28 @@
+language: r
+dist: trusty
+bioc_required: true
+os:
+  - linux
+cache:
+  directories:
+    - $HOME/.cache/hdf5
+    - $HOME/R/Library
+services:
+  - docker
+addons:
+  apt:
+    packages:
+      - libssh-dev  # PRISM > ssh > libssh-dev
+before_install:
+  - export HDF5_DIR=$HOME/.cache/hdf5
+  - echo $HDF5_DIR
+  - export HDF5_VERSION=1.10.1
+  - echo $HDF5_VERSION
+  - source .travis_get_hdf5_if_needed.sh
+  - R -e "install.packages('hdf5r')"
+install:
+ - docker build -t dynverse/ti_angle .
+ - R -e 'if ("devtools" %in% rownames(installed.packages())) update.packages(oldPkgs = "devtools", ask = FALSE) else install.packages("devtools")'
+ - R -e 'setRepositories(ind = 1:4); devtools::install_github(c("dynverse/dynwrap@devel", "dynverse/dyntoy@devel"), dependencies = TRUE, upgrade = TRUE)'
+script:
+  - R -e 'source("example.R"); traj <- dynwrap::infer_trajectory(data, "dynverse/ti_angle", params)'
