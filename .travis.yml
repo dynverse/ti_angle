@@ -12,7 +12,7 @@ services:
   - docker
 env:
  - CONTAINER=docker
- - CONTAINER=singularity
+# - CONTAINER=singularity
 addons:
   apt:
     packages:
@@ -23,7 +23,7 @@ before_install:
   - if [ "$CONTAINER" == "singularity" ]; then source travis_scripts/singularity.sh; fi
 install:
  - R -e 'if ("devtools" %in% rownames(installed.packages())) update.packages(oldPkgs = "devtools", ask = FALSE) else install.packages("devtools")'
- - R -e 'devtools::install_github(c("dynverse/dynwrap@devel", "dynverse/dyntoy@devel"), upgrade = TRUE, dep = FALSE)'
+ - R -e 'devtools::install_github("dynverse/dyntoy", upgrade = TRUE)'
 script:
  - if [ "$CONTAINER" == "singularity" ]; then source travis_scripts/test_singularity_image.sh; fi
  - if [ "$CONTAINER" == "docker" ]; then source travis_scripts/test_docker_image.sh; fi
