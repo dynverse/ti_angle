@@ -1,28 +1,29 @@
 language: r
 dist: trusty
 bioc_required: true
+sudo: true
 os:
   - linux
 cache:
   directories:
-    - $HOME/.cache/hdf5
+    - $HOME/.cache # hdf5
     - $HOME/R/Library
 services:
   - docker
+env:
+ - CONTAINER=docker
+ - CONTAINER=singularity
 addons:
   apt:
     packages:
       - libssh-dev  # PRISM > ssh > libssh-dev
 before_install:
-  - export HDF5_DIR=$HOME/.cache/hdf5
-  - echo $HDF5_DIR
-  - export HDF5_VERSION=1.10.1
-  - echo $HDF5_VERSION
-  - source <(curl -s https://raw.githubusercontent.com/dynverse/dynwrap/master/.travis_get_hdf5_if_needed.sh)
-  - R -e "install.packages('hdf5r')"
+  - git clone https://github.com/dynverse/travis_scripts.git
+  - source travis_scripts/hdf5.sh
+  - if [ "$CONTAINER" == "singularity" ]; then source travis_scripts/singularity.sh; fi
 install:
- - docker build -t dynverse/travis_test_build .
  - R -e 'if ("devtools" %in% rownames(installed.packages())) update.packages(oldPkgs = "devtools", ask = FALSE) else install.packages("devtools")'
- - R -e 'setRepositories(ind = 1:4); devtools::install_github(c("dynverse/dynwrap@devel", "dynverse/dyntoy@devel"), dependencies = TRUE, upgrade = TRUE)'
+ - R -e 'setRepositories(ind = 1:4); devtools::install_github(c("dynverse/dynwrap@devel", "dynverse/dyntoy@devel"), upgrade = TRUE)'
 script:
-  - R -e 'source("example.R"); traj <- dynwrap::infer_trajectory(data, "dynverse/travis_test_build", params)'
+ - if [ "$CONTAINER" == "singularity" ]; then source travis_scripts/test_singularity_image.sh; fi
+ - if [ "$CONTAINER" == "docker" ]; then source travis_scripts/test_docker_image.sh; fi
