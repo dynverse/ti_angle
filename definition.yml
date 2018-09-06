@@ -1,5 +1,6 @@
 id: angle
 docker_repository: dynverse/ti_angle
+singularity_collection: 1533
 container_url: https://github.com/dynverse/ti_angle
 name: Angle
 type: control
