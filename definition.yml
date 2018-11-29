@@ -16,7 +16,7 @@ container_url: https://github.com/dynverse/ti_angle
 parameters:
 - id: dimred
   description: Which dimensionality reduction method to use.
-  class: character_parameter
+  type: character
   default: pca
   values: 
   - pca
