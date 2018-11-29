@@ -1,16 +1,21 @@
 # method info
-id: angle
-name: Angle
-wrapper_type: cyclic_trajectory
-source: offtheshelf
-platform: R
-topology_inference: fixed
-trajectory_types: cycle
+method_info:
+  id: angle
+  name: Angle
+  source: offtheshelf
+  platform: R
+
+# wrapper info
+wrapper_info:
+  wrapper_type: cyclic_trajectory
+  topology_inference: fixed
+  trajectory_types: cycle
 
 # container info
-docker_repository: dynverse/ti_angle
-singularity_collection: 1533
-container_url: https://github.com/dynverse/ti_angle
+container_info:
+  docker_repository: dynverse/ti_angle
+  singularity_collection: 1533
+  container_url: https://github.com/dynverse/ti_angle
 
 # parameters
 parameters:
