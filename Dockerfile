@@ -1,7 +1,8 @@
-FROM dynverse/dynwrap:r
+FROM dynverse/dynwrapr:v0.1.0
 
-ADD . /code
+COPY definition.yml example.R run.sh /code/
 
-LABEL version 0.1.5
+RUN R -e 'devtools::install_github("dynverse/dyncli", dependencies = TRUE)' && \
+	rm -rf /tmp/*
 
-ENTRYPOINT Rscript /code/run.R
+LABEL version 0.2.0

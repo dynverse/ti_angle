@@ -1,26 +1,25 @@
-# method info
-method_info:
+method:
   id: angle
   name: Angle
   source: offtheshelf
   platform: R
 
-# wrapper info
-wrapper_info:
-  wrapper_type: cyclic_trajectory
+wrapper:
+  type: cyclic_trajectory
   topology_inference: fixed
   trajectory_types: cycle
+  command:
+  - Rscript
+  - /code/run.R
+  example: /code/example.R
 
-# container info
-container_info:
-  docker_repository: dynverse/ti_angle
-  singularity_collection: 1533
-  container_url: https://github.com/dynverse/ti_angle
+container:
+  docker: dynverse/ti_angle
+  url: https://github.com/dynverse/ti_angle
 
-# parameters
 parameters:
 - id: dimred
-  description: Which dimensionality reduction method to use.
+  description: Which dimensionality reduction method to use
   type: character
   default: pca
   values: 
@@ -37,14 +36,10 @@ parameters:
   - dm_diffusionMap
   - dm_destiny
 
-# input
 input:
-  format: rds
   required: expression
 
-# output
 output:
-  format: rds
   outputs:
   - cyclic_trajectory
   - dimred
