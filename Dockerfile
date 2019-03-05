@@ -4,9 +4,4 @@ ARG GITHUB_PAT
 
 COPY definition.yml example.R run.R /code/
 
-RUN R -e 'devtools::install_github("dynverse/dyncli", dependencies = TRUE)' && \
-	rm -rf /tmp/*
-
-LABEL version 0.2.0
-
 ENTRYPOINT ["/code/run.R"]
