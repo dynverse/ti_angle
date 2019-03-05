@@ -32,7 +32,9 @@ pseudotime <- atan2(dimred[,2], dimred[,1]) / 2 / pi + .5
 # TIMING: done with method
 timings$method_aftermethod <- Sys.time()
 
-# return output
+#####################################
+###     SAVE OUTPUT TRAJECTORY    ###
+#####################################
 output <-
   wrap_data(
     cell_ids = rownames(expression)
@@ -48,7 +50,4 @@ output <-
     timings = timings
   )
 
-#####################################
-###     SAVE OUTPUT TRAJECTORY    ###
-#####################################
 dyncli::write_h5(output, task$output)
