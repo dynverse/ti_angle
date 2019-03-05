@@ -8,10 +8,12 @@ wrapper:
   type: cyclic_trajectory
   topology_inference: fixed
   trajectory_types: cycle
-  command:
-  - Rscript
-  - /code/run.R
   example: /code/example.R
+  input_required: expression
+  output: 
+  - cyclic_trajectory
+  - dimred
+  - timings
 
 container:
   docker: dynverse/ti_angle
@@ -35,13 +37,4 @@ parameters:
   - umap
   - dm_diffusionMap
   - dm_destiny
-
-input:
-  required: expression
-
-output:
-  outputs:
-  - cyclic_trajectory
-  - dimred
-  - timings
 
