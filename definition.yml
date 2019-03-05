@@ -10,10 +10,6 @@ wrapper:
   trajectory_types: cycle
   example: /code/example.R
   input_required: expression
-  output: 
-  - cyclic_trajectory
-  - dimred
-  - timings
 
 container:
   docker: dynverse/ti_angle
@@ -24,7 +20,7 @@ parameters:
   description: Which dimensionality reduction method to use
   type: character
   default: pca
-  values: 
+  values:
   - pca
   - mds
   - tsne

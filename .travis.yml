@@ -2,16 +2,16 @@ language: r
 dist: trusty
 sudo: true
 os:
-  - linux
+- linux
 cache:
   directories:
-    - $HOME/.cache # hdf5
-    - $HOME/R/Library
+  - "$HOME/.cache"
+  - "$HOME/R/Library"
 services:
 - docker
 before_install:
-- openssl aes-256-cbc -K $encrypted_d886c47c7f64_key -iv $encrypted_d886c47c7f64_iv
-  -in credentials.enc -out credentials -d
+- openssl aes-256-cbc -K $encrypted_a3b751919ee3_key -iv $encrypted_a3b751919ee3_iv
+  -in credentials.enc -out ~\/credentials -d
 - source credentials
 - source <(curl -sSL https://raw.githubusercontent.com/dynverse/travis_scripts/master/helper.sh)
 install:
@@ -29,9 +29,9 @@ after_success:
 - push_docker
 jobs:
   include:
-    - stage: cache
-      script:
-        - echo Don't build/test docker since this is a cache warmup
-      after_success:
-        - echo Don't push docker since this is a cache warmup
-    - stage: build
+  - stage: cache
+    script:
+    - echo Don't build/test docker since this is a cache warmup
+    after_success:
+    - echo Don't push docker since this is a cache warmup
+  - stage: build
