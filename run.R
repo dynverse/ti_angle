@@ -12,7 +12,6 @@ library(dyncli, warn.conflicts = FALSE)
 #####################################
 
 task <- dyncli::main()
-
 params <- task$params
 expression <- task$expression
 
