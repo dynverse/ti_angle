@@ -11,7 +11,7 @@ library(dyncli, warn.conflicts = FALSE)
 ###           LOAD DATA           ###
 #####################################
 
-task <- dyncli::main(args = commandArgs(trailingOnly = TRUE))
+task <- dyncli::main()
 
 params <- task$params
 expression <- task$expression
