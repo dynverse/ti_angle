@@ -54,4 +54,4 @@ output <-
     timings = timings
   )
 
-dyncli::write_output(output, task)
+dyncli::write_output(output, task$output)
