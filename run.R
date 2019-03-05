@@ -49,4 +49,4 @@ output <-
     timings = timings
   )
 
-dyncli::write_h5(output, task$output)
+dyncli::write_output(output, task)
