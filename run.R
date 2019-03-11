@@ -1,32 +1,26 @@
 #!/usr/local/bin/Rscript
 
-library(readr, warn.conflicts = FALSE)
+task <- dyncli::main()
+
+library(dyncli, warn.conflicts = FALSE)
 library(dplyr, warn.conflicts = FALSE)
 library(purrr, warn.conflicts = FALSE)
 library(dyndimred, warn.conflicts = FALSE)
 library(dynwrap, warn.conflicts = FALSE)
-library(dyncli, warn.conflicts = FALSE)
 
 #####################################
 ###           LOAD DATA           ###
 #####################################
 
-task <- dyncli::main()
-
-#' @example
-#' task <- dyncli::main(
-#'   args = "--dataset ~/example/test.loom --dimred landmark_mds --output ~/example/output.h5" %>% strsplit(" ") %>% first(),
-#'   definition_location = "~/Workspace/dynverse/methods/ti_angle/definition.yml"
-#' )
 params <- task$params
 expression <- task$expression
+
+# TIMING: done with preproc
+timings <- list(method_afterpreproc = Sys.time())
 
 #####################################
 ###        INFER TRAJECTORY       ###
 #####################################
-
-# TIMING: done with preproc
-timings <- list(method_afterpreproc = Sys.time())
 
 # perform PCA dimred
 dimred <- dyndimred::dimred(as.matrix(expression), method = params$dimred, ndim = 2)
