@@ -6,11 +6,13 @@ data <- dyntoy::generate_dataset(
   id = "specific_example/angle",
   num_cells = 300,
   num_features = 250,
-  model = "cyclic"
+  model = "cyclic",
+  normalise = FALSE
 )
 
 # add method specific args (if needed)
 data$params <- list()
+data$seed <- 1
 
 # write example dataset to file
 file <- commandArgs(trailingOnly = TRUE)[[1]]
