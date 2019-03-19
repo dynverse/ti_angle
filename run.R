@@ -12,7 +12,7 @@ library(dynwrap, warn.conflicts = FALSE)
 ###           LOAD DATA           ###
 #####################################
 
-params <- task$params
+parameters <- task$parameters
 expression <- task$expression
 
 # TIMING: done with preproc
@@ -23,7 +23,7 @@ timings <- list(method_afterpreproc = Sys.time())
 #####################################
 
 # perform PCA dimred
-dimred <- dyndimred::dimred(as.matrix(expression), method = params$dimred, ndim = 2)
+dimred <- dyndimred::dimred(as.matrix(expression), method = parameters$dimred, ndim = 2)
 
 # transform to pseudotime using atan2
 pseudotime <- atan2(dimred[,2], dimred[,1]) / 2 / pi + .5
