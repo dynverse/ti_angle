@@ -1,36 +1,35 @@
-id: angle
-docker_repository: dynverse/ti_angle
-singularity_collection: 1533
-container_url: https://github.com/dynverse/ti_angle
-name: Angle
-source: offtheshelf
-trajectory_types: cycle
-topology_inference: fixed
-platform: R
+method:
+  id: angle
+  name: Angle
+  source: offtheshelf
+  platform: R
+
+wrapper:
+  type: cyclic_trajectory
+  topology_inference: fixed
+  trajectory_types: cycle
+  input_required: expression
+
+container:
+  docker: dynverse/ti_angle
+  url: https://github.com/dynverse/ti_angle
+
 parameters:
-  dimred:
-    type: discrete
-    default: pca
-    values:
-    - pca
-    - mds
-    - tsne
-    - ica
-    - lle
-    - landmark_mds
-    - mds_sammon
-    - mds_isomds
-    - mds_smacof
-    - umap
-    - dm_diffusionMap
-    description: Which dimensionality reduction method to use.
-input:
-  format: rds
-  required: expression
-output:
-  format: rds
-  outputs:
-  - cyclic_trajectory
-  - dimred
-  - timings
-wrapper_type: cyclic_trajectory
+- id: dimred
+  description: Which dimensionality reduction method to use
+  type: character
+  default: pca
+  values:
+  - pca
+  - mds
+  - tsne
+  - ica
+  - lle
+  - landmark_mds
+  - mds_sammon
+  - mds_isomds
+  - mds_smacof
+  - umap
+  - dm_diffusionMap
+  - dm_destiny
+
