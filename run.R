@@ -1,11 +1,10 @@
 #!/usr/local/bin/Rscript
 
+requireNamespace("dyncli", quiet = TRUE)
 task <- dyncli::main()
 
-library(dyncli, warn.conflicts = FALSE)
-library(dplyr, warn.conflicts = FALSE)
+requireNamespace("dyndimred", quiet = TRUE)
 library(purrr, warn.conflicts = FALSE)
-library(dyndimred, warn.conflicts = FALSE)
 library(dynwrap, warn.conflicts = FALSE)
 
 #####################################
@@ -23,7 +22,7 @@ timings <- list(method_afterpreproc = Sys.time())
 #####################################
 
 # perform PCA dimred
-dimred <- dyndimred::dimred(as.matrix(expression), method = parameters$dimred, ndim = 2)
+dimred <- dyndimred::dimred(expression, method = parameters$dimred, ndim = 2)
 
 # transform to pseudotime using atan2
 pseudotime <- atan2(dimred[,2], dimred[,1]) / 2 / pi + .5
