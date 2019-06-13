@@ -1,9 +1,9 @@
 #!/usr/local/bin/Rscript
 
-requireNamespace("dyncli", quiet = TRUE)
+requireNamespace("dyncli", quietly = TRUE)
 task <- dyncli::main()
 
-requireNamespace("dyndimred", quiet = TRUE)
+requireNamespace("dyndimred", quietly = TRUE)
 library(purrr, warn.conflicts = FALSE)
 library(dynwrap, warn.conflicts = FALSE)
 
